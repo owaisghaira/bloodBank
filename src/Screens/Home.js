@@ -1,21 +1,22 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
-import FormButton from "../components/FormButton";
-import { useDispatch,useSelector } from "react-redux";
-import { sign_out } from "../Store/Actions/Actions";
+import { useDispatch } from "react-redux";
 
-const Home = () => {
+const Home = ({ navigation }) => {
     const dispatch = useDispatch()
-    
+
     return (
         <View>
             <Text>Home </Text>
-            <FormButton
-                buttonTitle="Logout"
-                onPress={() => dispatch(sign_out())}
-
+            <Button
+                title="Go to Donors"
+                onPress={() => navigation.navigate('donors')}
             />
 
+            <Button
+                title="Go to Request"
+                onPress={() => navigation.navigate('request')}
+            />
         </View>
     )
 }

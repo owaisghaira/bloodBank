@@ -9,8 +9,8 @@ const Router = () => {
 
     return (
         <NavigationContainer>
-            {user.email ? <AppStack /> : <AuthStack />}
-
+            {/* {user.email ? <AppStack /> : <AuthStack />} */}
+        <AppStack/>
 
         </NavigationContainer>
     )

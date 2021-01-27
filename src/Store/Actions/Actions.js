@@ -1,4 +1,5 @@
 import auth from "@react-native-firebase/auth";
+import database from '@react-native-firebase/database';
 
 export const create_user = (data) => {
     return (dispatch) => {
@@ -29,7 +30,7 @@ export const sign_in = (data) => {
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                dispatch({ type: "USERDATA", data: data })
+                dispatch({ type: "USERDATA", data: user })
 
 
             })
@@ -47,6 +48,17 @@ export const sign_out = () => {
             .then(() => {
                 alert('Sign-out successful')
                 dispatch({ type: "USEROUT", data: user })
+            }).catch((error) => {
+                alert(error)
+            });
+    }
+}
+export const donor_post = (data) => {
+    return (dispatch) => {
+        database().ref('/').child("donors").push(data)
+            .then(() => {
+                alert('added successful')
+                dispatch({ type: "ADDONOR", data: data })
             }).catch((error) => {
                 alert(error)
             });
