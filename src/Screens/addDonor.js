@@ -3,15 +3,25 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import FormInput from '../components/Input'
 import FormButton from '../components/FormButton'
 import { useDispatch } from "react-redux";
-import { donor_post } from '../Store/Actions/Actions'
+import { donor_data } from '../Store/Actions/Actions'
+import database from '@react-native-firebase/database';
 
 
 const AddDonor = ({ navigation }) => {
     const dispatch = useDispatch()
     const [donor, setDonor] = useState({ name: '', dateOfBirth: '', bloodGroup: '', location: '', phone: '', city: '' });
+
     const postdonor = () => {
-        dispatch(donor_post(donor))
+        database().ref('/').child("donors").push(donor)
+            .then(() => {
+                alert('added successful')
+                dispatch(donor_data())
+                
+            }).catch((error) => {
+                alert(error)
+            });
     }
+    
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Add Blood Donor</Text>

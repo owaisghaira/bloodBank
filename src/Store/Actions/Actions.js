@@ -53,14 +53,29 @@ export const sign_out = () => {
             });
     }
 }
-export const donor_post = (data) => {
+// export const donor_post = (data) => {
+//     return (dispatch) => {
+//         database().ref('/').child("donors").push(data)
+//             .then(() => {
+//                 alert('added successful')
+//                 // dispatch({ type: "ADDONOR", data: data })
+//             }).catch((error) => {
+//                 alert(error)
+//             });
+//     }
+// }
+
+export const donor_data = () => {
+    let firedata = []
     return (dispatch) => {
-        database().ref('/').child("donors").push(data)
-            .then(() => {
-                alert('added successful')
-                dispatch({ type: "ADDONOR", data: data })
-            }).catch((error) => {
-                alert(error)
-            });
+        database().ref('/').child('donors').on('child_added', data => {
+            firedata.push(data.val())
+        })
+        console.log(firedata)
+        dispatch({ type: "DONORDATA", data: firedata })
+            // .then(() => {
+            // }).catch((error) => {
+            //     alert(error)
+            // });
     }
 }

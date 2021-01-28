@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, Button } from 'react-native'
 import { useDispatch } from "react-redux";
+import { donor_data } from "../Store/Actions/Actions";
 
 const Home = ({ navigation }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(donor_data())
+    }, [])
 
     return (
         <View>

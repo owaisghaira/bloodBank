@@ -5,7 +5,7 @@ import DonorCard from "../components/Donorcard";
 
 const Donors = ({ navigation }) => {
     let { transaction } = useSelector((state) => state.DonorReducer)
-
+    console.log(transaction)
     return (
 
         <ScrollView>
