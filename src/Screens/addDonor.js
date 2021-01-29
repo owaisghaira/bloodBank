@@ -16,12 +16,11 @@ const AddDonor = ({ navigation }) => {
             .then(() => {
                 alert('added successful')
                 dispatch(donor_data())
-                
+
             }).catch((error) => {
                 alert(error)
             });
     }
-    
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Add Blood Donor</Text>

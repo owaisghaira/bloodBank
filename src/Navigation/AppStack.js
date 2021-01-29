@@ -11,6 +11,7 @@ import Donors from '../Screens/Donors'
 import AddDonors from '../Screens/addDonor'
 import Request from '../Screens/bloodRequest'
 import AddRequest from '../Screens/addRequest'
+import DonorsMap from '../Screens/donorsMap'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -66,6 +67,16 @@ const mainTabScreen = () => (
     <Tab.Screen
       name="addrequest"
       component={AddRequestStackScreen}
+      options={{
+        tabBarLabel: 'Add Request',
+        tabBarIcon: ({ color }) => (
+          <Icon name="add-circle" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="ad"
+      component={DonorsMap}
       options={{
         tabBarLabel: 'Add Request',
         tabBarIcon: ({ color }) => (
