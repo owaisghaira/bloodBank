@@ -65,13 +65,12 @@ export const sign_out = () => {
 //     }
 // }
 
+let firedata = []
 export const donor_data = () => {
-    let firedata = []
     return (dispatch) => {
         database().ref('/').child('donors').on('child_added', data => {
             firedata.push(data.val())
         })
-        console.log(firedata)
         dispatch({ type: "DONORDATA", data: firedata })
             // .then(() => {
             // }).catch((error) => {

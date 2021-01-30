@@ -25,11 +25,15 @@ const AddDonor = ({ navigation }) => {
                 .then(() => {
                     alert('added successful')
                     dispatch(donor_data())
-
+                    clr();
                 }).catch((error) => {
                     alert(error)
                 });
         }
+    }
+    const clr = () => {
+        setDonor({ name: '', dateOfBirth: '', bloodGroup: '', phone: '', city: '' })
+        
     }
     return (
         <View style={styles.container}>
@@ -85,10 +89,13 @@ const AddDonor = ({ navigation }) => {
             {/* {!coordinate.latitude ?
                 <FormButton
                     buttonTitle="Add Current Location"
-                    onPress={() => navigation.navigate('addmap')}
+                    onPress={() => navigation.navigate('currentMap')}
                 />
                 :
-                <Text>Location Added</Text>
+                <FormButton
+                    buttonTitle="Location Done"
+                    onPress={() => navigation.navigate('currentMap')}
+                />
             } */}
              <FormButton
                     buttonTitle="Add Current Location"
