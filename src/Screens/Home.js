@@ -20,8 +20,8 @@ const Home = ({ navigation }) => {
             />
 
             <Button
-                title="Go to Request"
-                onPress={() => navigation.navigate('request')}
+                title="Go to map"
+                onPress={() => navigation.navigate('donorsmap')}
             />
         </View>
     )

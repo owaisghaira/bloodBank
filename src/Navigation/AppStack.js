@@ -11,7 +11,8 @@ import Donors from '../Screens/Donors'
 import AddDonors from '../Screens/addDonor'
 import Request from '../Screens/bloodRequest'
 import AddRequest from '../Screens/addRequest'
-import DonorsMap from '../Screens/donorsMap'
+import CurrentMap from '../Screens/CurrentMap'
+import DonorsMap from '../Screens/MapView'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -31,6 +32,16 @@ const mainTabScreen = () => (
         tabBarColor: '#009387',
         tabBarIcon: ({ color }) => (
           <Icon name="home" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="donorsmap"
+      component={DonorsMap}
+      options={{
+        tabBarLabel: 'Map',
+        tabBarIcon: ({ color }) => (
+          <Icon name="location" color={color} size={26} />
         ),
       }}
     />
@@ -75,16 +86,7 @@ const mainTabScreen = () => (
         ),
       }}
     />
-    <Tab.Screen
-      name="addmap"
-      component={DonorsMap}
-      options={{
-        tabBarLabel: 'Add Map',
-        tabBarIcon: ({ color }) => (
-          <Icon name="add-circle" color={color} size={26} />
-        ),
-      }}
-    />
+    
 
   </Tab.Navigator>
 )
@@ -178,6 +180,28 @@ const RequestStackScreen = ({ navigation }) => (
     />
   </homeStack.Navigator>
 )
+const currentMapStackScreen = ({ navigation }) => (
+  <homeStack.Navigator screenOptions={{
+    headerStyle: {
+      backgroundColor: '#009387',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: '700',
+      color: '#fff',
+    }
+  }} >
+
+    <homeStack.Screen name="Currnet Map " component={CurrentMap}
+      options={{
+        headerLeft: () => (
+          <Icon.Button name='menu' backgroundColor='#009387'
+            onPress={() => (navigation.openDrawer())}
+          />)
+      }}
+    />
+  </homeStack.Navigator>
+)
 
 const AddRequestStackScreen = ({ navigation }) => (
   <homeStack.Navigator screenOptions={{
@@ -213,7 +237,7 @@ const AppStack = () => {
     // </Stack.Navigator>
     <Drawer.Navigator drawerContent={props => <DawerContent {...props} />}>
       <Drawer.Screen name="home" component={mainTabScreen} />
-      {/* <Drawer.Screen name="donors" component={donorStackScreen} /> */}
+      <Drawer.Screen name="currentMap" component={currentMapStackScreen} />
       {/* <Drawer.Screen name="Request" component={Request} /> */}
     </Drawer.Navigator>
   )

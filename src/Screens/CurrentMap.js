@@ -6,7 +6,7 @@ import { get_currentLocation } from "../Store/Actions/Actions";
 import { useDispatch } from "react-redux";
 
 
-const donorsMap = ({ navigation }) => {
+const CurrentMap = ({ navigation }) => {
     const dispatch = useDispatch()
     // const [latitude, setLatitude] = useState(0);
     // const [longitude, setLongitude] = useState(0);
@@ -77,7 +77,7 @@ const donorsMap = ({ navigation }) => {
     )
 }
 
-export default donorsMap
+export default CurrentMap
 
 const styles = StyleSheet.create({
     container: {

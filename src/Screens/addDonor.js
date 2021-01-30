@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import FormInput from '../components/Input'
 import FormButton from '../components/FormButton'
 import { useDispatch, useSelector } from "react-redux";
 import { donor_data } from '../Store/Actions/Actions'
 import database from '@react-native-firebase/database';
-import { set } from 'react-native-reanimated';
 
 
 const AddDonor = ({ navigation }) => {
@@ -18,9 +17,9 @@ const AddDonor = ({ navigation }) => {
     const postdonor = () => {
         if (coordinate.latitude === undefined) {
             alert("pick location first...")
-        }else if(donor.name === ''|| donor.bloodGroup === ''){
+        } else if (donor.name === '' || donor.bloodGroup === '') {
             alert("Fill Complete Form")
-        } 
+        }
         else {
             database().ref('/').child("donors").push({ ...donor, ...coordinate })
                 .then(() => {
@@ -83,10 +82,18 @@ const AddDonor = ({ navigation }) => {
                 placeholderText="City"
                 iconType="lock"
             />
-            <FormButton
-                buttonTitle="Add Location"
-                onPress={() => navigation.navigate('addmap')}
-            />
+            {/* {!coordinate.latitude ?
+                <FormButton
+                    buttonTitle="Add Current Location"
+                    onPress={() => navigation.navigate('addmap')}
+                />
+                :
+                <Text>Location Added</Text>
+            } */}
+             <FormButton
+                    buttonTitle="Add Current Location"
+                    onPress={() => navigation.navigate('currentMap')}
+                />
             <FormButton
                 buttonTitle="Add Donor"
                 onPress={() => postdonor()}
