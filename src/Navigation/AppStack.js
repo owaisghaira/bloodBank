@@ -47,6 +47,7 @@ const mainTabScreen = () => (
     <Tab.Screen
       name="addDonor"
       component={AdddonorStackScreen}
+      initialParams={{ longitude: 0, latitude: 0 }}
       options={{
         tabBarLabel: 'Add Donor',
         tabBarIcon: ({ color }) => (
@@ -75,10 +76,10 @@ const mainTabScreen = () => (
       }}
     />
     <Tab.Screen
-      name="ad"
+      name="addmap"
       component={DonorsMap}
       options={{
-        tabBarLabel: 'Add Request',
+        tabBarLabel: 'Add Map',
         tabBarIcon: ({ color }) => (
           <Icon name="add-circle" color={color} size={26} />
         ),

@@ -79,3 +79,8 @@ export const donor_data = () => {
             // });
     }
 }
+export const get_currentLocation = (data) => {
+    return (dispatch) => {
+        dispatch({ type: "CURRENTMAP", data})
+    }
+}

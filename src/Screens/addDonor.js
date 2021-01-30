@@ -2,24 +2,35 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import FormInput from '../components/Input'
 import FormButton from '../components/FormButton'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { donor_data } from '../Store/Actions/Actions'
 import database from '@react-native-firebase/database';
+import { set } from 'react-native-reanimated';
 
 
 const AddDonor = ({ navigation }) => {
+    let { coordinate } = useSelector((state) => state.DonorReducer)
+
     const dispatch = useDispatch()
-    const [donor, setDonor] = useState({ name: '', dateOfBirth: '', bloodGroup: '', location: '', phone: '', city: '' });
+    const [donor, setDonor] = useState({ name: '', dateOfBirth: '', bloodGroup: '', phone: '', city: '' });
+    // const [post, setpost] = useState({latitude: '', longitude: '',})
 
     const postdonor = () => {
-        database().ref('/').child("donors").push(donor)
-            .then(() => {
-                alert('added successful')
-                dispatch(donor_data())
+        if (coordinate.latitude === undefined) {
+            alert("pick location first...")
+        }else if(donor.name === ''|| donor.bloodGroup === ''){
+            alert("Fill Complete Form")
+        } 
+        else {
+            database().ref('/').child("donors").push({ ...donor, ...coordinate })
+                .then(() => {
+                    alert('added successful')
+                    dispatch(donor_data())
 
-            }).catch((error) => {
-                alert(error)
-            });
+                }).catch((error) => {
+                    alert(error)
+                });
+        }
     }
     return (
         <View style={styles.container}>
@@ -57,7 +68,7 @@ const AddDonor = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
             />
-            <FormInput
+            {/* <FormInput
                 labelValue={donor.location}
                 onChangeText={(e) => setDonor({ ...donor, location: e })}
                 placeholderText="Location"
@@ -65,14 +76,17 @@ const AddDonor = ({ navigation }) => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
-            />
+            /> */}
             <FormInput
                 labelValue={donor.city}
                 onChangeText={(e) => setDonor({ ...donor, city: e })}
                 placeholderText="City"
                 iconType="lock"
             />
-
+            <FormButton
+                buttonTitle="Add Location"
+                onPress={() => navigation.navigate('addmap')}
+            />
             <FormButton
                 buttonTitle="Add Donor"
                 onPress={() => postdonor()}

@@ -8,9 +8,8 @@ const INTITIAL_STATE = {
         //     phone: '03242630393',
         //     city: 'karachi'
         // },
-
-
-    ]
+    ],
+    coordinate:''
 }
 
 
@@ -30,6 +29,11 @@ export default (state = INTITIAL_STATE, action) => {
             return ({
                 ...state,
                 user: []
+            })
+        case 'CURRENTMAP':
+            return ({
+                ...state,
+                coordinate: action.data
             })
     }
     return state;
